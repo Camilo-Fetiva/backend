@@ -6,12 +6,17 @@
 import express from 'express'; //ECMAS 6
 import dotenv from 'dotenv'; //Dependencia para manejar variables de entorno
 import { connectionMongo } from './src/config/dataBase.js';
+import { productRouter } from './src/routes/products.routes.js';
 
 
 // 2. CONFIGURAR EL USO DEL SERVIDOR
 const app = express();
 dotenv.config(); //configurar para poder usar variables de entorno
 const port = process.env.PORT//3000, 6000 o 9000
+
+// Rutas que debe utilizar
+app.use(express.json()); //Usar formato JSON, CREAR y ACTUALIZAR datos
+app.use ( '/productos', productRouter);
 
 //INVOCAR LA FUNCION DE LA BASE DE DATOS
 connectionMongo ();
