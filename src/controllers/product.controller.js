@@ -57,7 +57,31 @@ export const getProduct = async (request, response) => {
 export const putProductById = async (request, response) => {
 
     // Logica de la peticion PUT
-    return response.json ({'Mensaje': 'Funciona la peticion PUT'})
+    try {
+        let idForPut = request.params.id; //Parametro ID del producto a actualizar
+        let dataForUpdate = request.body; // Informacion actualizada
+
+        const productUpdated = await productModel.findByIdAndUpdate(idForPut, dataForUpdate); // Parametro del ID  y luego parametro de la info actualizada
+
+        // Validacion cuando el ID no es correcto o no existe
+        // !productUpdated -> significa la negacion de una variable (ESTA VACIA O LA CONDICIONS ES FALSA)
+        if(!productUpdated){
+            return response.status(404).json ({
+                mensaje: "No se encontro producto para actualizar"
+            });
+        }
+
+        return response.status(200).json({
+            mensaje: "Se actualizo el producto correctamente",
+            datos: productUpdated
+        })
+
+    } catch (error) {
+        return response.status(400).json({
+            mensaje: "Ocurrio un error al actualizar el producto",
+            problem: error || error.message
+        });
+    }
 }
 
 
@@ -65,5 +89,19 @@ export const putProductById = async (request, response) => {
 export const deleteProductById = async (request, response) => {
 
     // Logica de la peticion DELETE
-    return response.json ({'Mensaje': 'Funciona la peticion DELETE'})
+    try {
+        let idForDelete = request.params.id;
+        //Lo eliminado no se guarda en una variable
+        await productModel.findByIdAndDelete(idForDelete); //Encotrar el producto por ID y eliminarlo
+        return response.status(200).json({
+            mensaje: "Producto eliminado satisfactoriamente" //Mensaje que se da al eliminar un rpodcuto
+        });
+
+
+    } catch (error) {
+        return response.status(400).json({
+            mensaje: "Ocurrio un error al eliminar el producto",
+            problem: error || error.message
+        });
+    }
 }
