@@ -3,7 +3,7 @@
 
 // 1. Importar las dependencias y el modelo de datos a manipular
 
-import bcrypt from 'bcryptjs'// Dependencia de encriptacion
+import bcrypt from 'bcryptjs';// Dependencia de encriptacion
 import { userModel } from '../models/users.model.js';
 
 // CREAR LAS FUNCIONES ASINCRONAS PARA CADA PETICION
