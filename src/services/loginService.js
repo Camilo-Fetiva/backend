@@ -10,7 +10,7 @@ import { json, request } from "express";
 
 
 // 4. CREAR LA FUNCION PARA GESTIONAR EL INICIO
-async function loginUser(request, response){
+export async function loginUser(request, response){
     // MANEJO DE ERRORES
     try {
         // VALIDACION = CORREO
@@ -62,3 +62,5 @@ async function loginUser(request, response){
         });
     }
 }
+
+

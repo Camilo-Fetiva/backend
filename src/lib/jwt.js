@@ -5,7 +5,7 @@
 
 
 // 3. Importar modulos y dependencias
-import jwt, { TokenExpiredError } from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 dotenv.config();
 
